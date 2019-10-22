@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Title</title>
+    <style>
+        button{
+            margin:6px 2px;
+        }
+    </style>
+</head>
+<body>
+<button id="infor">信息框</button>
+<button id="prompt">提示</button>
+<button id="ask">询问框</button>
+<button id="bottomDialog">底部对话框</button>
+<button id="bottomTip">底部提示</button>
+<button id="defineStyle">自定义标题风格</button>
+<button id="page">页面层</button>
+<button id="loading">loading层</button>
+<button id="loadingText">loading带文字</button>
+<button id="bottomFullDialog">一个在底部弹出的完整对话框</button>
+<button id="autoClose">设置3秒自动关闭</button>
+<button id="banClickMask">设置不允许点遮罩关闭</button>
+<button id="defineFullPage">自定义一个全屏的页面层</button>
+
+
+
+
+
+
+
+<!--一、使用时，请把文件夹layer整个放置在您站点的任何一个目录，只需引入layer.js即可，除jQuery外，其它文件无需再引入。
+二、如果您的js引入是通过合并处理或者您不想采用layer自动获取的绝对路径，您可以通过layer.config()来配置（详见官网API页）
+三、jquery需1.8+
+四、更多使用说明与演示，请参见layer官网。
+五、使用时请务必保留来源，请勿用于违反我国法律的web平台。
+六、layer遵循LGPL协议，将永久性提供无偿服务。版权最终解释权：贤心。-->
+<script src="./lib/jquery-2.2.0.js"></script>
+<script src="layer/layer.js"></script>
+<script>
+    /*信息框*/
+    $("#infor").on("click",function(){
+        layer.open({
+            content: '移动版和PC版不能同时存在同一页面',
+            btn: '我知道了'
+        });
+    })
+    /*提示*/
+    $("#prompt").on("click",function(){
+        layer.open({
+            content: 'hello layer'
+            ,skin: 'msg'
+            ,time: 2 //2秒后自动关闭
+        });
+    })
+    /*询问框*/
+    $("#ask").on("click",function(){
+        layer.open({
+            content: '您确定要刷新一下本页面吗？'
+            ,btn: ['刷新', '不要']
+            ,yes: function(index){
+                location.reload();
+                layer.close(index);
+            }
+        });
+    })
+    /*底部对话框*/
+    $("#bottomDialog").on("click",function(){
+        layer.open({
+            content: '这是一个底部弹出的询问提示'
+            ,btn: ['删除', '取消']
+            ,skin: 'footer'
+            ,yes: function(index){
+                layer.open({content: '执行删除操作'})
+            }
+        });
+    })
+    /*底部提示*/
+    $("#bottomTip").on("click",function(){
+        layer.open({
+            content: '一个没有任何按钮的底部提示'
+            ,skin: 'footer'
+        });
+    })
+    /*自定义标题风格*/
+    $("#defineStyle").on("click",function(){
+        layer.open({
+            title: [
+                '我是标题',
+                'background-color: #FF4351; color:#fff;'
+            ]
+            ,content: '标题风格任你定义。'
+        });
+    })
+    /*页面层*/
+    $("#page").on("click",function(){
+        layer.open({
+            type: 1
+            ,content: '可传入任何内容，支持html。一般用于手机页面中'
+            ,anim: 'up'
+            ,style: 'position:fixed; bottom:0; left:0; width: 100%; height: 200px; padding:10px 0; border:none;'
+        });
+    })
+    /*loading层*/
+    $("#loading").on("click",function(){
+        layer.open({type: 2});
+    })
+    /*loading带文字*/
+    $("#loadingText").on("click",function(){
+        layer.open({
+            type: 2
+            ,content: '加载中'
+        });
+    })
+    /*一个在底部弹出的完整对话框*/
+    $("#bottomFullDialog").on("click",function(){
+        layer.open({
+            title: [
+                '我是标题',
+                'background-color:#8DCE16; color:#fff;'
+            ]
+            ,anim: 'up'
+            ,content: '展现的是全部结构'
+            ,btn: ['确认', '取消']
+        });
+    })
+    /*设置3秒自动关闭*/
+    $("#autoClose").on("click",function(){
+        layer.open({
+            content: '通过style设置你想要的样式'
+            ,style: 'background-color:#09C1FF; color:#fff; border:none;' //自定风格
+            ,time: 3
+        });
+    })
+    /*设置不允许点遮罩关闭*/
+    $("#banClickMask").on("click",function(){
+        layer.open({
+            content: '不允许点击遮罩关闭',
+            btn: '我知道了',
+            shadeClose: false,
+            yes: function(){
+                layer.open({
+                    content: '好的'
+                    ,time: 2
+                    ,skin: 'msg'
+                });
+            }
+        });
+    })
+    /*自定义一个全屏的页面层*/
+    $("#defineFullPage").on("click",function(){
+        var pageii = layer.open({
+            type: 1
+            ,content: html
+            ,anim: 'up'
+            ,style: 'position:fixed; left:0; top:0; width:100%; height:100%; border: none; -webkit-animation-duration: .5s; animation-duration: .5s;'
+        });
+    })
+</script>
+</body>
+</html>
